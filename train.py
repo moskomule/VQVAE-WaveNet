@@ -14,7 +14,7 @@ from chainer.training import extensions
 
 from utils import Preprocess
 from utils import ExponentialMovingAverage
-from WaveNet import WaveNet
+from wavenet import WaveNet
 from net import Encoder, ConditionEmbed, VAE
 from updaters import VQVAE_StandardUpdater, VQVAE_ParallelUpdater
 import params
@@ -70,7 +70,7 @@ shutil.copy('params.py', os.path.join(result, 'params.py'))
 shutil.copy('generate.py', os.path.join(result, 'generate.py'))
 shutil.copy('net.py', os.path.join(result, 'net.py'))
 shutil.copy('updaters.py', os.path.join(result, 'updaters.py'))
-shutil.copytree('WaveNet', os.path.join(result, 'WaveNet'))
+shutil.copytree('wavenet', os.path.join(result, 'wavenet'))
 
 # Model
 encoder = Encoder(params.d)

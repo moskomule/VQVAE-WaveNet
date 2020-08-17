@@ -25,7 +25,7 @@ use_logistic = False
 d = 512
 k = 128
 
-# parameters of Decoder(WaveNet)
+# parameters of Decoder(wavenet)
 n_loop = 3
 n_layer = 10
 filter_size = 2

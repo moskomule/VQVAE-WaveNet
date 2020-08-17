@@ -1,0 +1,38 @@
+data:
+  name: VCTK
+  batch_size: 4
+
+  sr: 16_000
+  res_type: kaiser_fast
+  top_db: 20
+  length: 7680
+
+optim:
+  lr: 2e-4
+  ema_mu: 0.9999
+
+model:
+  # vqvae
+  dict_size: 512
+  k: 128
+
+  # wavenet
+  num_loops: 3
+  num_layers: 10
+  filter_size: 2
+  input_dim: 256
+  quantize: 256
+  use_logistic: false
+
+  residual_channels: 512
+  dilated_channel: 512
+  skip_channels: 256
+
+  num_mixture: 30
+  log_scale_min: -40
+  global_conditon_dim: 128
+  local_condition_dim: 512
+  dropout_rate: 0
+
+seed: 1
+gpu: 0

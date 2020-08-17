@@ -1,9 +1,10 @@
 import chainer
 import chainer.functions as F
 import chainer.links as L
-from modules import VQ
-from modules import WaveNet
+
 from utils import ExponentialMovingAverage
+from utils import VQ
+from wavenet import WaveNet
 
 
 class Encoder(chainer.Chain):
@@ -93,13 +94,13 @@ class VAE(chainer.Chain):
         length = local_cond.shape[2]
 
         # generate
-        for i in range(length-1):
+        for i in range(length - 1):
             with chainer.using_config('enable_backprop', False):
-                out = dec.generate(one_hot, local_cond[:, :, i:i+1])
+                out = dec.generate(one_hot, local_cond[:, :, i:i + 1])
             zeros = self.xp.zeros_like(one_hot.array)
             value = self.xp.random.choice(
                 self.quantize, size=1, p=F.softmax(out).array[0, :, 0, 0])
-            output[i:i+1] = value
+            output[i:i + 1] = value
             zeros[:, value, :, :] = 1
             one_hot = chainer.Variable(zeros)
         return output

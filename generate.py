@@ -5,7 +5,7 @@ import numpy
 import librosa
 import chainer
 
-from WaveNet import WaveNet
+from wavenet import WaveNet
 from net import Encoder, ConditionEmbed
 from utils import MuLaw
 from utils import Preprocess
