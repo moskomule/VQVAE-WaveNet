@@ -6,9 +6,9 @@ import librosa
 import chainer
 
 from wavenet import WaveNet
-from net import Encoder, ConditionEmbed
+from models import Encoder, ConditionEmbed
 from utils import MuLaw
-from utils import Preprocess
+from utils import Preprocessor
 from utils import VQ
 import params
 
@@ -40,7 +40,7 @@ elif params.dataset_type == 'vs':
 
 # preprocess
 n = 1  # batchsize; now suporrts only 1
-preprocess = Preprocess(
+preprocess = Preprocessor(
     params.sr, params.res_type, params.top_db, params.input_dim,
     params.quantize, None, params.use_logistic, params.root,
     params.dataset_type)
@@ -149,5 +149,5 @@ if use_gpu:
 if params.use_logistic:
     wave = output
 else:
-    wave = MuLaw(params.quantize).itransform(output)
+    wave = MuLaw(params.quantize).inverse(output)
 librosa.output.write_wav(args.output, wave, params.sr)
